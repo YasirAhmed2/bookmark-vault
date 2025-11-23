@@ -27,6 +27,28 @@ export const registerUser = async (req, res) => {
   }
 };
 
+/**
+ * Authenticates a user using email and password from the request body, issues a JWT, and sets it as a cookie.
+ *
+ * Workflow:
+ * - Reads email and password from req.body.
+ * - Looks up the user via findUserByEmail(email).
+ * - Verifies the provided password against the stored hash using bcrypt.compare.
+ * - On successful verification, signs a JWT with payload { userId: user._id } using process.env.JWT_SECRET
+ *   with a 7-day expiration, sets a cookie named "token" containing the JWT, and responds with a success message
+ *   and the userId.
+ * - If the user is not found or the password does not match, responds with HTTP 400 and { msg: "Invalid credentials" }.
+ * - On unexpected errors, responds with HTTP 500 and { msg: "Server error" }.
+ *
+ * @async
+ * @function loginUser
+ * @param {import("express").Request} req - Express request object. Expects req.body.email {string} and req.body.password {string}.
+ * @param {import("express").Response} res - Express response object. Used to set cookie and send JSON responses.
+ * @returns {Promise<void>} Sends an HTTP response (no value returned). On success: 200 with JSON { msg: "Login successful", userId }.
+ * @see findUserByEmail
+ * @see bcrypt.compare
+ * @see jwt.sign
+ */
 export const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
