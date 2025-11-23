@@ -11,7 +11,7 @@ export default function LoginPage() {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:5000/api/users/login", { email, password });
+      const res = await axios.post("http://localhost:5000/auth/login", { email, password });
       localStorage.setItem("token", res.data.token);
       navigate("/dashboard");
     // eslint-disable-next-line @typescript-eslint/no-explicit-any

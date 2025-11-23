@@ -15,7 +15,7 @@ export default function DashboardPage() {
     const token = localStorage.getItem("token");
     if (!token) return navigate("/");
     try {
-      const res = await axios.get("http://localhost:5000/api/bookmarks", {
+      const res = await axios.get("http://localhost:5000/bookmarks", {
         headers: { Authorization: `Bearer ${token}` }
       });
       setBookmarks(res.data);

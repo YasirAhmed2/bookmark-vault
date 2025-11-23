@@ -12,7 +12,7 @@ export default function RegisterPage() {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:5000/api/users/register", { username, email, password });
+      const res = await axios.post("http://localhost:5000/auth/register", { username, email, password });
       localStorage.setItem("token", res.data.token);
       navigate("/dashboard");
     // eslint-disable-next-line @typescript-eslint/no-explicit-any

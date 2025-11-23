@@ -11,7 +11,7 @@ export default function BookmarkList({ bookmarks, refresh }: Props) {
   const handleDelete = async (id: string) => {
     const token = localStorage.getItem("token");
     if (!token) return;
-    await axios.delete(`http://localhost:5000/api/bookmarks/${id}`, {
+    await axios.delete(`http://localhost:5000/bookmarks/${id}`, {
       headers: { Authorization: `Bearer ${token}` }
     });
     refresh();

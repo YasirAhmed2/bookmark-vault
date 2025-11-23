@@ -16,7 +16,7 @@ export default function BookmarkForm({ refresh }: Props) {
     e.preventDefault();
     const token = localStorage.getItem("token");
     if (!token) return;
-    await axios.post("http://localhost:5000/api/bookmarks", { title, url }, {
+    await axios.post("http://localhost:5000/bookmarks", { title, url }, {
       headers: { Authorization: `Bearer ${token}` }
     });
     setTitle("");
