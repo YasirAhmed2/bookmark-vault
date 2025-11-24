@@ -31,11 +31,12 @@ export const addBookmark = async (req, res) => {
 
     const bookmark = await createBookmark({
       ...req.body,
-      userId: req.user._id,
+      userId: req.user,
     });
 
     res.json({ msg: "Bookmark added", bookmark });
   } catch (err) {
+    console.log(req.user)
     res.status(500).json({ msg: "Server error" });
   }
 };
