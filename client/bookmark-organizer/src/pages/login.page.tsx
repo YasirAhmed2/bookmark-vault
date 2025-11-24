@@ -1,7 +1,6 @@
-import { useState,type FormEvent } from "react";
+import { useState, type FormEvent } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useNavigate } from "react-router";
-import './LoginPage.css';
 
 export default function LoginPage() {
   const [email, setEmail] = useState<string>("");
@@ -11,8 +10,14 @@ export default function LoginPage() {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     try {
-      const res = await axios.post("http://localhost:5000/auth/login", { email, password });
-      localStorage.setItem("token", res.data.token);
+      // Make sure cookies are sent/received
+      await axios.post(
+        "http://localhost:5000/auth/login",
+        { email, password },
+        { withCredentials: true } // <- this allows sending/receiving cookies
+      );
+      // No need to save token in localStorage anymore
+      // console.log(email,password);
       navigate("/dashboard");
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
@@ -24,8 +29,19 @@ export default function LoginPage() {
     <div className="page-container">
       <h2>Login</h2>
       <form onSubmit={handleSubmit}>
-        <input value={email} onChange={e => setEmail(e.target.value)} placeholder="Email" required />
-        <input type="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="Password" required />
+        <input
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="Email"
+          required
+        />
+        <input
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          placeholder="Password"
+          required
+        />
         <button type="submit">Login</button>
       </form>
       <p onClick={() => navigate("/register")}>Don't have an account? Register</p>

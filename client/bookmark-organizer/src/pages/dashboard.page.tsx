@@ -16,6 +16,7 @@ export default function DashboardPage() {
     if (!token) return navigate("/");
     try {
       const res = await axios.get("http://localhost:5000/bookmarks", {
+        withCredentials: true,
         headers: { Authorization: `Bearer ${token}` }
       });
       setBookmarks(res.data);
