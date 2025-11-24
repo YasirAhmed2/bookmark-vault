@@ -1,6 +1,10 @@
 import { Bookmark } from "./bookmark.mongo.js";
 
-export const createBookmark = (data) => Bookmark.create(data);
+export const createBookmark = async (data) => {
+  const bookmark = new Bookmark(data);
+  return await bookmark.save(); // save and return
+};
+
 
 export const getBookmarksByUser = (userId) =>{
  Bookmark.find({ userId });
