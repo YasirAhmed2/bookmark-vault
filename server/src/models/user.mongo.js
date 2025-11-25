@@ -4,11 +4,11 @@ import mongoose from "mongoose";
  * Mongoose schema for a User document.
  *
  * @typedef {Object} User
- * @property {string} username - The user's display name. Required.
- * @property {string} email - The user's email address. Required and unique.
- * @property {string} password - The user's hashed password. Required.
+ * @property {string} username - Required. The user's display name.
+ * @property {string} email - Required. Unique. The user's email address (used as login identifier).
+ * @property {string} password - Required. The user's hashed password.
  *
- * @type {import('mongoose').Schema<User>}
+ * @type {import('mongoose').Schema}
  */
 const userSchema = new mongoose.Schema({
   username: { type: String, required: true },

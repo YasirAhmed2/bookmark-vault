@@ -2,33 +2,25 @@ import express from "express";
 import { registerUser, loginUser} from "../controllers/auth.controller.js";
 
 /**
- * Router instance that groups authentication-related HTTP endpoints.
+ * Express router that groups authentication-related routes and middleware.
  *
- * Provides routes for user authentication flows such as:
- *  - registration (sign up)
- *  - login (sign in)
- *  - logout
- *  - token refresh
- *  - email verification and password reset (if implemented)
+ * @constant {import("express").Router} authRouter
  *
- * Responsibilities:
- *  - wires route paths to authentication controller handlers
- *  - applies request validation and authentication middleware (e.g. input validators, rate limiting, JWT/session checks)
- *  - forwards errors to the central error handler and ensures consistent response shapes
- *  - typically mounted on a path like '/auth' in the main application (e.g. app.use('/auth', authRouter))
+ * @description
+ * Router responsible for handling authentication and account-related endpoints such as
+ * registration, login, logout, token refresh, email verification, and password reset.
+ * Route-level middleware (validation, rate limiting, auth guards, etc.) is typically
+ * applied here and requests are forwarded to controller/handler functions.
  *
- * Implementation notes:
- *  - This is an Express Router instance created via express.Router().
- *  - Route handlers should be implemented as async-safe controllers and kept thin (business logic in services).
- *  - Security-sensitive operations (passwords, tokens) should use appropriate hashing, cookie flags, and secure token storage.
+ * Intended to be mounted on the main Express app, for example:
+ *   app.use('/auth', authRouter);
  *
- * @constant
- * @type {import("express").Router}
- * @name authRouter
  * @example
- * // mount in your app
- * // const app = express();
+ * // in your server entry
+ * // const { authRouter } = require('./routers/auth.route');
  * // app.use('/auth', authRouter);
+ *
+ * @exports authRouter
  */
 const authRouter = express.Router();
 

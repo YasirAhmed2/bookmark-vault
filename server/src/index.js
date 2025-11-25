@@ -1,4 +1,3 @@
-
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
@@ -25,16 +24,18 @@ app.get("/", (req, res) => {
   res.send("Welcome to Bookmark Organizer API");
 });
 
+
+
 /**
  * Port on which the server will listen.
  *
- * Obtained from the environment variable `PORT`; if not provided, defaults to 5000.
+ * Uses the PORT environment variable when present; falls back to 5000 otherwise.
+ * Note: environment variables are strings, so this value may be a string or a number.
  *
- * @constant {(number|string)} PORT
+ * @constant {string|number}
  * @default 5000
  * @see process.env.PORT
  */
-
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, async () => {
     console.log(`Server running on ${PORT}`)

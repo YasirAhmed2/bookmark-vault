@@ -2,21 +2,21 @@ import express from "express";
 import { addBookmark, getMyBookmarks, removeBookmark } from "../controllers/bookmark.controller.js";
 import { authMiddleware } from "../middleware/auth.middleware.js";
 
+
 /**
- * Express Router instance responsible for handling bookmark-related endpoints.
+ * Express Router for bookmark-related endpoints.
  *
- * Intended to be mounted in the application (for example at `/bookmarks`) and
- * provides the typical CRUD routes for bookmark resources, e.g.:
- *   - GET    /           -> list bookmarks
- *   - POST   /           -> create a new bookmark
- *   - GET    /:id        -> retrieve a bookmark by id
- *   - PUT    /:id        -> update a bookmark by id
- *   - DELETE /:id        -> delete a bookmark by id
+ * Groups and exposes routes that perform bookmark operations such as
+ * creating, reading, updating, and deleting bookmarks. Intended to be
+ * mounted on the main Express application (for example: app.use('/bookmarks', bookmarkRouter)).
  *
- * This router may apply middleware such as authentication, request validation,
- * and error handling specific to bookmark operations.
+ * Responsibilities:
+ *  - Define route handlers for bookmark CRUD operations.
+ *  - Apply bookmark-specific middleware (authentication, validation, rate limiting, etc.).
+ *  - Keep bookmark routing concerns isolated from other route modules.
  *
- * @constant {import('express').Router} bookmarkRouter
+ * @constant {import("express").Router} bookmarkRouter
+ * @module routers/bookmark.route
  */
 const bookmarkRouter = express.Router();
 

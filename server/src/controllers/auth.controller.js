@@ -51,6 +51,30 @@ console.log("Created user: ", user);
  * @see bcrypt.compare
  * @see jwt.sign
  */
+/**
+ * Authenticate a user, issue a JWT, and set it as an HTTP-only cookie.
+ *
+ * Expects req.body to contain:
+ *  - email: string
+ *  - password: string
+ *
+ * Behavior:
+ *  - Looks up the user via findUserByEmail(email).
+ *  - If no user is found or the password does not match (using bcrypt.compare),
+ *    responds with status 400 and { msg: "Invalid credentials" }.
+ *  - On successful authentication, signs a JWT containing { userId: user._id }
+ *    with secret from process.env.JWT_SECRET and expiration of 7 days.
+ *  - Sets the JWT in a cookie named "token" with options:
+ *      { httpOnly: true, secure: false, sameSite: "lax", path: "/" }.
+ *  - Responds with status 200 and JSON: { msg: "Login successful", userId }.
+ *  - On unexpected errors responds with status 500 and { msg: "Server error" }.
+ *
+ * @async
+ * @function loginUser
+ * @param {import('express').Request} req - Express request object.
+ * @param {import('express').Response} res - Express response object.
+ * @returns {Promise<import('express').Response>} HTTP response with appropriate status and JSON body.
+ */
 export const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
