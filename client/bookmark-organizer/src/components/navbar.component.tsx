@@ -1,18 +1,19 @@
+
 import { useNavigate } from "react-router";
-import './Navbar.css';
+// import axios from "axios";
+import "./Navbar.css";
 
-export default function Navbar() {
+interface Props {
+  logout: () => void; // receive logout function from DashboardPage
+}
+
+export default function Navbar({ logout }: Props) {
   const navigate = useNavigate();
-
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    navigate("/");
-  };
 
   return (
     <nav>
       <button onClick={() => navigate("/dashboard")}>Dashboard</button>
-      <button onClick={handleLogout}>Logout</button>
+      <button onClick={logout}>Logout</button>
     </nav>
   );
 }

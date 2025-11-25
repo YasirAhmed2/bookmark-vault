@@ -1,6 +1,7 @@
+
 import axios from "axios";
-import { type Bookmark } from "../types/index.t.ts";
-import './BookmarkList.css';
+import { type Bookmark } from "../types/index.t";
+import "./BookmarkList.css";
 
 interface Props {
   bookmarks: Bookmark[];
@@ -9,19 +10,24 @@ interface Props {
 
 export default function BookmarkList({ bookmarks, refresh }: Props) {
   const handleDelete = async (id: string) => {
-    const token = localStorage.getItem("token");
-    if (!token) return;
-    await axios.delete(`http://localhost:5000/bookmarks/${id}`, {
-      headers: { Authorization: `Bearer ${token}` }
-    });
-    refresh();
+    try {
+      await axios.delete(`http://localhost:5000/bookmarks/delete/${id}`, {
+        withCredentials: true,
+      });
+
+      refresh();
+    } catch (error) {
+      alert(error.response?.data?.msg || "Failed to delete bookmark");
+    }
   };
 
   return (
     <ul>
-      {bookmarks.map(b => (
+      {bookmarks.map((b) => (
         <li key={b._id}>
-          <a href={b.url} target="_blank" rel="noopener noreferrer">{b.title}</a>
+          <a href={b.url} target="_blank" rel="noopener noreferrer">
+            {b.title}
+          </a>
           <button onClick={() => handleDelete(b._id)}>Delete</button>
         </li>
       ))}
