@@ -1,3 +1,8 @@
+/**
+ * DashboardPage 
+ * Shows the user's bookmarks, allows adding new ones, and supports logout.
+ * Fetches bookmarks from the server and redirects to login if unauthorized.
+ */
 
 import { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router";
@@ -10,41 +15,7 @@ import "./DashboardPage.css";
 
 axios.defaults.withCredentials = true; // always send cookies
 
-/**
- * DashboardPage component
- *
- * Renders the authenticated user's bookmarks and provides controls to add new
- * bookmarks and log out. Manages bookmark data fetching, error handling, and
- * navigation for unauthorized access.
- *
- * Behavior:
- * - Maintains local state `bookmarks: Bookmark[]` to store fetched bookmarks.
- * - Uses `useNavigate` from react-router to redirect unauthenticated users to
- *   the login route ("/").
- * - Defines `fetchBookmarks` as a memoized async function (via `useCallback`)
- *   that:
- *   - Performs a GET request to "http://localhost:5000/bookmarks" to load
- *     bookmarks for the current user.
- *   - Updates `bookmarks` state with the server response.
- *   - On error (e.g., unauthorized), logs the error and navigates to the login page.
- * - Calls `fetchBookmarks` inside a `useEffect` to fetch bookmarks on component mount.
- * - Provides `handleLogout`, an async function that:
- *   - Sends a POST to "http://localhost:5000/auth/logout" to clear server-side session/cookie.
- *   - Regardless of request success or failure, clears local `bookmarks` state and navigates to the login page.
- *
- * Child component interactions:
- * - Renders a <Navbar /> and passes `handleLogout` as the `logout` prop.
- * - Renders a <BookmarkForm /> and a <BookmarkList /> and passes `fetchBookmarks`
- *   as a `refresh` callback to allow child components to trigger a bookmarks refresh.
- * - Supplies `bookmarks` state as a prop to <BookmarkList />.
- *
- * Notes:
- * - Uses axios for HTTP requests; endpoints are hard-coded to "http://localhost:5000".
- * - Navigation to "/" indicates an application-level decision to show the login page
- *   when authentication is missing or invalid.
- *
- * @returns {JSX.Element} The dashboard page JSX.
- */
+
 export default function DashboardPage() {
   const [bookmarks, setBookmarks] = useState<Bookmark[]>([]);
   const navigate = useNavigate();
