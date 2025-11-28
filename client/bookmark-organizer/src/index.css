@@ -24,3 +24,144 @@ a {
   border-radius: 8px;
   box-shadow: 0 2px 7px rgba(0,0,0,0.1);
 }
+
+:root {
+  --bg-color: #f9f9f9;
+  --text-color: #2c3e50;
+  --card-bg: #ffffff;
+  --btn-bg: #3498db;
+  --btn-hover: #2980b9;
+  --input-bg: #ffffff;
+  --input-border: #ccc;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] {
+  --bg-color: #1f1f2e;
+  --text-color: #ecf0f1;
+  --card-bg: #2c2c3e;
+  --btn-bg: #e67e22;
+  --btn-hover: #d35400;
+  --input-bg: #3a3a50;
+  --input-border: #555;
+  --shadow-color: rgba(0, 0, 0, 0.5);
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  transition: all 0.3s ease;
+}
+
+.page-container {
+  max-width: 700px;
+  margin: 50px auto;
+  padding: 20px;
+  border-radius: 12px;
+  background-color: var(--card-bg);
+  box-shadow: 0 4px 12px var(--shadow-color);
+  transition: all 0.3s ease;
+}
+
+button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  background-color: var(--btn-bg);
+  color: #fff;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background-color: var(--btn-hover);
+  transform: translateY(-1px);
+}
+input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 12px;
+  border-radius: 6px;
+  border: 1px solid var(--input-border);
+  background-color: var(--input-bg);
+  color: var(--text-color);
+  transition: all 0.3s ease;
+}
+
+input:focus {
+  outline: none;
+  border-color: var(--btn-bg);
+  box-shadow: 0 0 5px var(--btn-bg);
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 20px;
+  background-color: var(--card-bg);
+  box-shadow: 0 2px 6px var(--shadow-color);
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+nav button {
+  margin-left: 10px;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  padding: 10px 15px;
+  border-radius: 10px;
+  background-color: var(--input-bg);
+  box-shadow: 0 2px 8px var(--shadow-color);
+  transition: transform 0.2s ease;
+}
+
+li:hover {
+  transform: translateY(-2px);
+}
+
+li a {
+  color: var(--text-color);
+  text-decoration: none;
+  word-break: break-word;
+}
+
+li button {
+  padding: 4px 10px;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: var(--text-color);
+}
+
+p {
+  text-align: center;
+  color: var(--btn-bg);
+  cursor: pointer;
+  margin-top: 12px;
+  transition: all 0.2s ease;
+}
+
+p:hover {
+  text-decoration: underline;
+}
