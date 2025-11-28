@@ -1,24 +1,14 @@
+/**
+ * Adds a new bookmark for the logged-in user.
+ * Validates input, creates the bookmark, and returns a JSON response.
+ * logged in user can view its bookmarks
+ * also can delete its bookmarks
+ */
+
 import { createBookmark, getBookmarksByUser, deleteBookmark } from "../models/bookmark.model.js";
 import { validateBookmark } from "../utils/validation.js";
 
 
-/**
- * Adds a bookmark for the authenticated user.
- *
- * Validates the incoming bookmark payload and, if valid, creates a bookmark
- * record associated with the authenticated user (from req.user). Responds
- * with JSON indicating success or the appropriate error status.
- *
- * @async
- * @param {import('express').Request} req - Express request object.
- *   - Expects bookmark data in req.body.
- *   - Expects authentication information in req.user (used as the bookmark's userId).
- * @param {import('express').Response} res - Express response object used to send JSON responses.
- * @returns {Promise<void>} Sends one of:
- *   - 400 with { msg: "Invalid input" } if validateBookmark(req.body) fails.
- *   - 200 with { msg: "Bookmark added", bookmark } on successful creation.
- *   - 500 with { msg: "Server error" } on unexpected errors (and logs req.user).
- */
 export const addBookmark = async (req, res) => {
   try {
     if (!validateBookmark(req.body))

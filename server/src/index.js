@@ -24,18 +24,12 @@ app.get("/", (req, res) => {
   res.send("Welcome to Bookmark Organizer API");
 });
 
-
-
 /**
- * Port on which the server will listen.
- *
- * Uses the PORT environment variable when present; falls back to 5000 otherwise.
- * Note: environment variables are strings, so this value may be a string or a number.
- *
- * @constant {string|number}
- * @default 5000
- * @see process.env.PORT
+ * Server port.
+ * Uses process.env.PORT if available, otherwise defaults to 5000.
+ * Note: environment variables are strings.
  */
+
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, async () => {
     console.log(`Server running on ${PORT}`)

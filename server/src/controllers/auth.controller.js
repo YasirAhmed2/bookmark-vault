@@ -1,3 +1,10 @@
+/**
+ * Logs in a user and sets a JWT cookie.
+ * Checks email and password from req.body, issues a JWT if valid,
+ * and responds with success or error JSON.
+ * Also handles user registration and logout.
+ */
+
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { createUser, findUserByEmail } from "../models/user.model.js";
@@ -29,52 +36,7 @@ console.log("Created user: ", user);
   }
 };
 
-/**
- * Authenticates a user using email and password from the request body, issues a JWT, and sets it as a cookie.
- *
- * Workflow:
- * - Reads email and password from req.body.
- * - Looks up the user via findUserByEmail(email).
- * - Verifies the provided password against the stored hash using bcrypt.compare.
- * - On successful verification, signs a JWT with payload { userId: user._id } using process.env.JWT_SECRET
- *   with a 7-day expiration, sets a cookie named "token" containing the JWT, and responds with a success message
- *   and the userId.
- * - If the user is not found or the password does not match, responds with HTTP 400 and { msg: "Invalid credentials" }.
- * - On unexpected errors, responds with HTTP 500 and { msg: "Server error" }.
- *
- * @async
- * @function loginUser
- * @param {import("express").Request} req - Express request object. Expects req.body.email {string} and req.body.password {string}.
- * @param {import("express").Response} res - Express response object. Used to set cookie and send JSON responses.
- * @returns {Promise<void>} Sends an HTTP response (no value returned). On success: 200 with JSON { msg: "Login successful", userId }.
- * @see findUserByEmail
- * @see bcrypt.compare
- * @see jwt.sign
- */
-/**
- * Authenticate a user, issue a JWT, and set it as an HTTP-only cookie.
- *
- * Expects req.body to contain:
- *  - email: string
- *  - password: string
- *
- * Behavior:
- *  - Looks up the user via findUserByEmail(email).
- *  - If no user is found or the password does not match (using bcrypt.compare),
- *    responds with status 400 and { msg: "Invalid credentials" }.
- *  - On successful authentication, signs a JWT containing { userId: user._id }
- *    with secret from process.env.JWT_SECRET and expiration of 7 days.
- *  - Sets the JWT in a cookie named "token" with options:
- *      { httpOnly: true, secure: false, sameSite: "lax", path: "/" }.
- *  - Responds with status 200 and JSON: { msg: "Login successful", userId }.
- *  - On unexpected errors responds with status 500 and { msg: "Server error" }.
- *
- * @async
- * @function loginUser
- * @param {import('express').Request} req - Express request object.
- * @param {import('express').Response} res - Express response object.
- * @returns {Promise<import('express').Response>} HTTP response with appropriate status and JSON body.
- */
+
 export const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;

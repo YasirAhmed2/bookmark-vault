@@ -1,14 +1,13 @@
+/**
+ * Creates and saves a new bookmark.
+ * @async
+ * @param {Object} data - Bookmark info (title, url, etc.).
+ * @returns {Promise<Object>} The created bookmark.
+ * also fetches bookmarks by user and deletes bookmarks.
+ */
+
 import { Bookmark } from "./bookmark.mongo.js";
 
-/**
- * Create and persist a new Bookmark document.
- *
- * @async
- * @function createBookmark
- * @param {Object} data - The bookmark data to create. Should conform to the Bookmark schema (e.g., title, url, description, tags).
- * @returns {Promise<Object>} A promise that resolves to the saved Bookmark document.
- * @throws {Error} If saving the bookmark fails due to validation or database errors.
- */
 export const createBookmark = async (data) => {
   const bookmark = new Bookmark(data);
   return await bookmark.save(); // save and return
